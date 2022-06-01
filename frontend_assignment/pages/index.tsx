@@ -18,6 +18,7 @@ export default function Home() {
 
         const ethersProvider = new providers.Web3Provider(provider)
         const signer = ethersProvider.getSigner()
+        console.log("signer"+signer)
         const message = await signer.signMessage("Sign this message to create your identity!")
 
         const identity = new ZkIdentity(Strategy.MESSAGE, message)
@@ -50,7 +51,7 @@ export default function Home() {
             })
         })
 
-        if (response.status === 500) {
+        if (response.status != 200) {
             const errorMessage = await response.text()
 
             setLogs(errorMessage)
